@@ -1,0 +1,28 @@
+# Hostname para acessar o Rancher (deve bater com o /etc/hosts e com o kind-config.yaml)
+hostname: rancher.local
+
+# Número de réplicas para ambiente de desenvolvimento
+replicas: 1
+
+# Use o Secret tls-rancher-ingress (criado pelo cert-manager) para TLS
+ingress:
+  tls:
+    source: secret
+
+# Opcional: timeout maior para rollouts legados em ambientes locais lentos
+# (em segundos)
+extraArgs:
+  - --http-request-timeout=15m
+
+# Opcional: desabilita o audit log para simplificar local
+auditLog:
+  enabled: false
+
+# Recursos mínimos para dev (ajuste conforme sua máquina)
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 1Gi
